@@ -238,6 +238,10 @@ func (u *UserAgent) evalMacintosh(uaPlatformGroup string) {
 		u.OS.Version.parse(uaPlatformGroup[i+5:])
 
 		return
+	} else if i := strings.Index(uaPlatformGroup, "darwin"); i != -1 {
+		u.OS.Name = OSMacOSX
+		u.OS.Version.parse(uaPlatformGroup[i+7:])
+		return
 	}
 	u.OS.Name = OSUnknown
 }
@@ -278,6 +282,7 @@ func (v *Version) parse(str string) bool {
 	if len(str) == 0 || str[0] < '0' || str[0] > '9' {
 		return false
 	}
+
 	for i := 0; i < 3; i++ {
 		empty := true
 		val := 0

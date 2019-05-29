@@ -5,7 +5,10 @@
 // strings.
 package uasurfer
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 //go:generate stringer -type=DeviceType,BrowserName,OSName,Platform -output=const_string.go
 
@@ -138,6 +141,10 @@ type Version struct {
 	Major int
 	Minor int
 	Patch int
+}
+
+func (v *Version) String() string {
+	return fmt.Sprintf("%v.%v.%v", v.Major, v.Minor, v.Patch)
 }
 
 func (v Version) Less(c Version) bool {
